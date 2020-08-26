@@ -1,5 +1,6 @@
 package com.jemberdin.crud.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
@@ -95,6 +96,7 @@ public class User implements Persistable<Integer> {
     }
 
     @Override
+    @JsonIgnore
     public boolean isNew() {
         return this.id == null;
     }
