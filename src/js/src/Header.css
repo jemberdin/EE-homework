@@ -1,0 +1,18 @@
+.header {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    background: rgba(240, 240, 240, 0.9);
+    height: 90px;
+    padding: 5px;
+}
+
+.button {
+    margin: 20px 0;
+}
+
+.searchField {
+    margin: 20px 50px;
+    width: 50%;
+}
