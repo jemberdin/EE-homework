@@ -1,25 +1,41 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Table, Spin } from 'antd';
+import { getAllUsers } from './client';
+import { Table, Spin, Modal } from 'antd';
 import moment from 'moment';
 import Container from './Container';
-import Header from './Header'
+import Header from './Header';
+import AddUserForm from './forms/AddUserForm';
 
 class App extends Component {
 
   state = {
     users: [],
-    isLoading: true
+    isLoading: true,
+    isAddUserModalIsVisible: false
+  }
+
+  fetchUsers = () => {
+    getAllUsers()
+      .then(res => res.json()
+      .then(users => { this.setState({ users, isLoading: false });
+      }))
+  }
+
+  showAddUserModal = () => {
+    this.setState({isAddUserModalIsVisible: true});
+  }
+
+  hideAddUserModal = () => {
+    this.setState({isAddUserModalIsVisible: false});
   }
 
   async componentDidMount() {
-    const response = await fetch('/api/users')
-    const body = await response.json();
-    this.setState({users: body, isLoading: false})
-    
+    this.fetchUsers();
   }
+
   render() {
-    const { users, isLoading } = this.state;
+    const { users, isLoading, isAddUserModalIsVisible } = this.state;
 
     if(isLoading) {
       return (
@@ -75,16 +91,27 @@ class App extends Component {
       ];
 
       return (
-        
         <Container>
           <h1>EE homework</h1>
-          <Header></Header>
+          <Header handleAddUserCleckEvent={this.showAddUserModal} />
           <Table 
             style={{marginTop: '120px'}}
             dataSource={users} 
             columns={columns} 
             rowKey='id' 
             pagination={false} />
+          <Modal
+            title="Add new user"
+            visible={isAddUserModalIsVisible}
+            onOk={this.hideAddUserModal}
+            onCancel={this.hideAddUserModal} >
+            <AddUserForm 
+              onSuccess={() => {
+                this.hideAddUserModal();
+                this.fetchUsers();
+              }}
+            />
+          </Modal>
         </Container>
       );
     }

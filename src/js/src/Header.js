@@ -3,7 +3,6 @@ import Container from './Container';
 import { Button, Input } from 'antd';
 import './Header.css';
 
-
 const header = (props) => (
     <div className='header'>
         <Container>
@@ -11,8 +10,9 @@ const header = (props) => (
                 <Button 
                     className='button' 
                     size="large" 
-                    type='primary'>
-                        Add new user
+                    type='primary'
+                    onClick={() => props.handleAddUserCleckEvent()}>
+                    Add new user
                 </Button>
                 <Input.Search 
                     className='searchField' 

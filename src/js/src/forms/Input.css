@@ -1,0 +1,9 @@
+.Input {
+    margin-bottom: 5px;  
+}
+
+.ErrorMessage {
+    color: red;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
