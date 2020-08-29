@@ -6,6 +6,7 @@ import moment from 'moment';
 import Container from './Container';
 import Header from './Header';
 import AddUserForm from './forms/AddUserForm';
+import { errorNotification, successNotification } from './Notification';
 
 class App extends Component {
 
@@ -20,6 +21,10 @@ class App extends Component {
       .then(res => res.json()
       .then(users => { this.setState({ users, isLoading: false });
       }))
+      .catch(error => {
+        errorNotification(error.error.message, error.error.error);
+        this.setState({ isLoading: false });
+      })
   }
 
   showAddUserModal = () => {
@@ -109,6 +114,10 @@ class App extends Component {
               onSuccess={() => {
                 this.hideAddUserModal();
                 this.fetchUsers();
+                successNotification('User added successfully');
+              }}
+              onFailure={(error) => {
+                errorNotification(error.error.message, error.error.descriprion);
               }}
             />
           </Modal>

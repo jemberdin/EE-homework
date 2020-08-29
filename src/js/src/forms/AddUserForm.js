@@ -39,8 +39,13 @@ class AddUserForm extends Component {
                 onSubmit={(user, { setSubmitting }) => {
                     addNewUser(user).then(() => {
                         this.props.onSuccess();
-                        setSubmitting(false);
                     }) 
+                    .catch(error => {
+                        this.props.onFailure(error);
+                    })
+                    .finally(() => {
+                        setSubmitting(false);
+                    })
                 }}
                 >
                     {({
