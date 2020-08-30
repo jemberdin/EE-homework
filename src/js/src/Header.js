@@ -11,7 +11,7 @@ const header = (props) => (
                     className='button' 
                     size="large" 
                     type='primary'
-                    onClick={() => props.handleAddUserCleckEvent()}>
+                    onClick={() => props.handleAddUserClickEvent()}>
                     Add new user
                 </Button>
                 <Input.Search 

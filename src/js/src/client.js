@@ -26,9 +26,20 @@ export const addNewUser = user =>
     })
     .then(checkStatus);
 
-    export const deleteUser = (id, firstName, lastName) =>
-        fetch(`api/users/${id}`, {
-            method: 'DELETE'
-        })
-        .then(checkStatus);
+export const deleteUser = (id) =>
+    fetch(`api/users/${id}`, {
+        method: 'DELETE'
+    })
+    .then(checkStatus);
 
+
+export const updateUser = (id, user) => 
+    fetch(`api/users/${id}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(user)
+    })
+    .then(checkStatus);

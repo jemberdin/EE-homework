@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
-import { getAllUsers, deleteUser } from './client';
+import { getAllUsers, deleteUser, updateUser } from './client';
 import { Table, Spin, Modal, Button, Popconfirm } from 'antd';
 import moment from 'moment';
 import Container from './Container';
 import Header from './Header';
 import AddUserForm from './forms/AddUserForm';
+import EditUserForm from './forms/EditUserForm';
 import { errorNotification, successNotification } from './Notification';
 
 class App extends Component {
@@ -13,7 +14,9 @@ class App extends Component {
   state = {
     users: [],
     isLoading: true,
-    isAddUserModalIsVisible: false
+    selectedUser: {},
+    isAddUserModalIsVisible: false,
+    isEditUserModalIsVisible: false,
   }
 
   componentDidMount() {
@@ -35,8 +38,23 @@ class App extends Component {
     deleteUser(id).then(() => {
       successNotification('User deleted', `User ${firstName} ${lastName} was deleted`);
       this.fetchUsers();
-    }).catch(err => {
-      errorNotification('error', 'error', `(${err.error.status}) ${err.error.error}`);
+    }).catch(error => {
+      errorNotification(error.error.message, error.error.error);
+    });
+  }
+
+  editUser = selectedUser => {
+    this.setState({ selectedUser }, () => this.showEditUserModal());
+    
+  }
+
+  updateUserFormSubmitter = user => {
+    updateUser(user.id, user).then(() => {
+      successNotification('User updated', `User ${user.firstName} ${user.lastName} was updated`);
+      this.hideEditUserModal();
+      this.fetchUsers();
+    }).catch(error => {
+      errorNotification(error.error.message, error.error.error);
     });
   }
 
@@ -48,34 +66,50 @@ class App extends Component {
     this.setState({isAddUserModalIsVisible: false});
   }
 
+  showEditUserModal = () => {
+    this.setState({isEditUserModalIsVisible: true});
+  }
+
+  hideEditUserModal = () => {
+    this.setState({isEditUserModalIsVisible: false});
+  }
+
   render() {
-    const { users, isLoading, isAddUserModalIsVisible } = this.state;
+    const { users, isLoading, isAddUserModalIsVisible, isEditUserModalIsVisible, selectedUser } = this.state;
 
     const commonElements = () => (
       <div>
         <h1>EE homework</h1>
-        <Header handleAddUserCleckEvent={this.showAddUserModal} />
+        <Header handleAddUserClickEvent={this.showAddUserModal} />
         <Modal
-          title="Add new user"
+          title='Add new user'
           visible={isAddUserModalIsVisible}
           onOk={this.hideAddUserModal}
-          onCancel={this.hideAddUserModal} >
+          onCancel={this.hideAddUserModal}>
         <AddUserForm 
           onSuccess={() => {
             this.hideAddUserModal();
             this.fetchUsers();
-            successNotification('User successfully added');
+            successNotification('User added', 'User was successfully added');
           }}
           onFailure={(error) => {
             errorNotification(error.error.message, error.error.descriprion);
           }}
           />
         </Modal>
+
+        <Modal
+          title='Edit user'
+          visible={isEditUserModalIsVisible}
+          onOk={this.hideEditUserModal}
+          onCancel={this.hideEditUserModal} >
+        <EditUserForm 
+          initialValues={selectedUser} 
+          submitter={this.updateUserFormSubmitter}/>
+        </Modal>
       </div>
     )
     
-    
-
     if(isLoading) {
       return (
         <div className="spinner">
@@ -138,7 +172,7 @@ class App extends Component {
                 onCancel={e => e.stopPropagation()}>
                 <Button type='danger' onClick={(e) => e.stopPropagation()}>Delete</Button>
               </Popconfirm>
-              <Button style={{marginLeft: '5px'}}>Edit</Button>
+              <Button style={{marginLeft: '10px'}} onClick={() => this.editUser(record)}>Edit</Button>
             </Fragment>
           ),
         }
