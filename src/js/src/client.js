@@ -26,3 +26,9 @@ export const addNewUser = user =>
     })
     .then(checkStatus);
 
+    export const deleteUser = (id, firstName, lastName) =>
+        fetch(`api/users/${id}`, {
+            method: 'DELETE'
+        })
+        .then(checkStatus);
+
