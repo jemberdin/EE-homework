@@ -2,7 +2,6 @@ package com.jemberdin.crud.controller;
 
 import com.jemberdin.crud.model.User;
 import com.jemberdin.crud.service.UserService;
-import org.springframework.util.Assert;
 
 import java.util.List;
 

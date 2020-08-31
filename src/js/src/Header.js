@@ -1,26 +1,23 @@
 import React from 'react';
 import Container from './Container';
-import { Button, Input } from 'antd';
+import { Button } from 'antd';
 import './Header.css';
+import Complete from './Complete';
 
 const header = (props) => (
+    
     <div className='header'>
         <Container>
-            <div className='item'>
-                <Button 
-                    className='button' 
-                    size="large" 
-                    type='primary'
-                    onClick={() => props.handleAddUserClickEvent()}>
-                    Add new user
-                </Button>
-                <Input.Search 
-                    className='searchField' 
-                    size="large" 
-                    placeholder="Search user" 
-                    enterButton />
-            </div>          
+            <Button 
+                className='button' 
+                size='large'
+                type='primary'
+                onClick={() => props.handleAddUserClickEvent()}>
+                Add new user
+            </Button>
+            <Complete users={props.users}/>
         </Container>
+        
     </div>
 );
 

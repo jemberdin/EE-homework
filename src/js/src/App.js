@@ -80,7 +80,7 @@ class App extends Component {
     const commonElements = () => (
       <div>
         <h1>EE homework</h1>
-        <Header handleAddUserClickEvent={this.showAddUserModal} />
+        <Header handleAddUserClickEvent={this.showAddUserModal} users={users}/>
         <Modal
           title='Add new user'
           visible={isAddUserModalIsVisible}
@@ -141,6 +141,7 @@ class App extends Component {
           title: 'Date of birth',
           dataIndex: 'date',
           key: 'date',
+          render:(date)=>moment(date).format('DD.MM.YYYY'),
           sorter: (a, b) => moment(a.date).unix() - moment(b.date).unix(),
           sortDirections: ['descend', 'ascend'],
           
@@ -163,7 +164,7 @@ class App extends Component {
         {
           title: 'Action',
           key: 'action',
-          render: (text, record) => (
+          render: (record) => (
             <Fragment>
               <Popconfirm
                 placement='topRight'
@@ -187,7 +188,6 @@ class App extends Component {
             columns={columns} 
             rowKey='id' 
             pagination={false} />
-          
         </Container>
       );
     }
