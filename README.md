@@ -11,7 +11,7 @@
 and navigate to `crud/src/js/` - this is React application. 
 Make sure you have Node and Node Package Manager (npm) installed on your computer.
 "node -v" and "npm -v" is commands to see if Node and npm is installed.
-Type "npm start" hit `Enter`. React application should start.
+Type "npm start", hit `Enter`. React application should start.
 Open http://localhost:3000/ in your browser and test application.
 
 ### Additional information
@@ -20,5 +20,5 @@ Open http://localhost:3000/ in your browser and test application.
 * You can sort users by each column
 * Unique combination of users first and last name is cheking on back-end side, you will receive a 
 notification on front-end if entered data is not unique
-*Users email validation is done both on front-end and on back-end sides
+* Users email validation is done both on front-end and on back-end sides
 * Auto-complete is done using `antd`
