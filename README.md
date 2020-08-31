@@ -1,7 +1,7 @@
 ## CRUD application 
 
 ### Used Tech Stack
-* Back-end: Java, Spring Boot, Spring, JUnit5
+* Back-end: Java, Spring Boot, Spring, JUnit5, H2 in-memory database
 * Front-end: React, Ant Design (antd) and Formik libraries
 
 ### Application running
@@ -20,5 +20,6 @@ Open http://localhost:3000/ in your browser and test application.
 * You can sort users by each column
 * Unique combination of users first and last name is cheking on back-end side, you will receive a 
 notification on front-end if entered data is not unique
-* Users email validation is done both on front-end and on back-end sides
+* Users email validation done both on front-end and on back-end sides
 * Auto-complete is done using `antd`
+* Back-end service layer covered with unit tests
