@@ -1,8 +1,8 @@
 ## CRUD application 
 
 ### Used Tech Stack
-*Back-end: Java, Spring Boot, Spring, JUnit5
-*Front-end: React, Ant Design (antd) and Formik libraries
+* Back-end: Java, Spring Boot, Spring, JUnit5
+* Front-end: React, Ant Design (antd) and Formik libraries
 
 ### Application running
 * Download and import application to IDE
@@ -15,10 +15,10 @@ Type "npm start" hit `Enter`. React application should start.
 Open http://localhost:3000/ in your browser and test application.
 
 ### Additional information
-*All functional and non-functional requirements are implemented
-*You can read data from back-end, add, change and delete user information
-*You can sort users by each column
-*Unique combination of users first and last name is cheking on back-end side, you will receive a 
+* All functional and non-functional requirements are implemented
+* You can read data from back-end, add, change and delete user information
+* You can sort users by each column
+* Unique combination of users first and last name is cheking on back-end side, you will receive a 
 notification on front-end if entered data is not unique
 *Users email validation is done both on front-end and on back-end sides
-*Auto-complete is done using `antd`
+* Auto-complete is done using `antd`
